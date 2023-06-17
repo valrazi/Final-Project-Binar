@@ -38,4 +38,5 @@ public class CityController {
         return ResponseHandler.generateResponse("success", HttpStatus.CREATED, cityResponse);
     }
 
+
 }

@@ -14,5 +14,7 @@ public class Maskapai {
 
     private String namaMaskapai;
 
+    private String kodeMaskapai;
+
     private String logoMaskapai;
 }

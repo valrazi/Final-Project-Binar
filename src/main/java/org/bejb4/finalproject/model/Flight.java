@@ -20,23 +20,11 @@ public class Flight {
     private Jadwal jadwal;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "id_maskapai", nullable = false)
+    @JoinColumn(name = "id_kelas", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private Maskapai maskapai;
-//
-//    private int jmlKursiSeluruh;
-//
-//    private int jmlKursiEkonomi;
-//
-//    private int jmlKursiBisnis;
+    private Kelas kelas;
 
-    private int hargaEkonomi;
-
-    private int hargaEkonomiPremium;
-
-    private int hargaBisnis;
-
-    private int hargaFirstClass;
+    private int hargaTiket;
 
 
 }

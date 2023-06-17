@@ -4,19 +4,15 @@ import lombok.Data;
 
 import javax.persistence.*;
 
+
 @Data
 @Entity
-@Table(name = "city")
-public class City {
-
+@Table(name = "kelas")
+public class Kelas {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long idCity;
+    private int idKelas;
 
-    private String cityName;
-
-    private String cityCode;
-
-    private String cityAirport;
-
+    @Enumerated(EnumType.STRING)
+    private NamaKelas namaKelas;
 }
