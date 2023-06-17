@@ -23,16 +23,20 @@ public class Flight {
     @JoinColumn(name = "id_maskapai", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Maskapai maskapai;
-
-    private int jmlKursiSeluruh;
-
-    private int jmlKursiEkonomi;
-
-    private int jmlKursiBisnis;
+//
+//    private int jmlKursiSeluruh;
+//
+//    private int jmlKursiEkonomi;
+//
+//    private int jmlKursiBisnis;
 
     private int hargaEkonomi;
 
+    private int hargaEkonomiPremium;
+
     private int hargaBisnis;
+
+    private int hargaFirstClass;
 
 
 }

@@ -12,8 +12,10 @@ public class City {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idCity;
 
-    private String namaKota;
+    private String cityName;
 
-    private String kodeKota;
+    private String cityCode;
+
+    private String cityAirport;
 
 }
