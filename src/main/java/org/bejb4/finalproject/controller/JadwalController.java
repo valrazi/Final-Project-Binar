@@ -21,15 +21,29 @@ public class JadwalController {
     @GetMapping
     public ResponseEntity<Object> getAllJadwal(@RequestParam(name = "date", required = false) String tgl,
                                                @RequestParam(name = "from", required = false) String from,
-                                               @RequestParam(name = "to", required = false) String to){
-         if(tgl != null && from != null && to != null){
+                                               @RequestParam(name = "to", required = false) String to,
+                                               @RequestParam(name = "class", required = false) Integer idKelas){
+         if(tgl != null && from != null && to != null && idKelas != null){
              LocalDate tglParsed = LocalDate.parse(tgl);
-             return ResponseHandler.generateResponse("success", HttpStatus.OK, jadwalService.getJadwalByTglKeberangkatan(tglParsed, from, to));
+             return ResponseHandler.generateResponse("success", HttpStatus.OK, jadwalService.getJadwalByTglKeberangkatan(tglParsed, from, to, idKelas));
          }
          return ResponseHandler.generateResponse("success", HttpStatus.OK, jadwalService.getAllJadwal());
     }
 
-    
+    @GetMapping("/harga")
+    public ResponseEntity<Object> getHargaJadwal(@RequestParam(name = "date") String tgl,
+                                                 @RequestParam(name = "from") String from,
+                                                 @RequestParam(name = "to") String to,
+                                                 @RequestParam(name = "class") Integer idKelas){
+        try{
+            LocalDate tglParsed = LocalDate.parse(tgl);
+            return ResponseHandler.generateResponse("success", HttpStatus.OK, jadwalService.getHarga(tglParsed, from, to, idKelas));
+        }catch (Exception e){
+            return ResponseHandler.generateResponse("error", HttpStatus.BAD_REQUEST, null);
+        }
+    }
+
+
 
     @PostMapping
     public ResponseEntity<Object> addJadwal(@RequestBody Jadwal jadwal){

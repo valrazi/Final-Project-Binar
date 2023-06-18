@@ -24,7 +24,9 @@ public class Jadwal {
 
     private LocalTime jamKedatangan;
 
-    private String durasiKeberangkatan;
+    private Integer durasiJam;
+
+    private Integer durasiMenit;
 
     private int hargaTiket;
 

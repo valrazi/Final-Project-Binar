@@ -3,6 +3,8 @@ package org.bejb4.finalproject.service;
 import org.bejb4.finalproject.model.Jadwal;
 import org.bejb4.finalproject.repository.JadwalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -17,8 +19,18 @@ public class JadwalService {
         return jadwalRepository.findAll();
     }
 
-    public List<Jadwal> getJadwalByTglKeberangkatan(LocalDate tgl, String kotaBrgkt, String kotaKedatangan){
-        return jadwalRepository.findJadwalByTglKeberangkatan(tgl, kotaBrgkt, kotaKedatangan);
+    public List<Jadwal> getJadwalByTglKeberangkatan(LocalDate tgl, String kotaBrgkt, String kotaKedatangan, Integer idKelas){
+        return jadwalRepository.findJadwalByTglKeberangkatan(tgl, kotaBrgkt, kotaKedatangan, idKelas);
+    }
+
+    public Object getHarga(LocalDate tgl, String kotaBrgkt, String kotaKedatangan, Integer idKelas){
+        Pageable onePrice = PageRequest.of(0,1);
+        List<Integer> dataHarga = jadwalRepository.findHarga(tgl, kotaBrgkt, kotaKedatangan, idKelas, onePrice);
+        if(dataHarga.size() > 0){
+            Integer hargaTermurah = dataHarga.get(0);
+            return  hargaTermurah;
+        }
+        return null;
     }
 
     public Jadwal addJadwal(Jadwal jadwal){
@@ -32,7 +44,8 @@ public class JadwalService {
         LocalTime jamKedatangan = jadwal.getJamKedatangan();
         int hoursDurasi = jamKedatangan.minusHours(jamKeberangkatan.getHour()).getHour();
         int minuteDurasi = jamKedatangan.minusMinutes(jamKeberangkatan.getMinute()).getMinute();
-        newJadwal.setDurasiKeberangkatan(hoursDurasi + "h " + minuteDurasi + "m");
+        newJadwal.setDurasiJam(hoursDurasi);
+        newJadwal.setDurasiMenit(minuteDurasi);
 
 
         newJadwal.setKotaKeberangkatan(jadwal.getKotaKeberangkatan());
