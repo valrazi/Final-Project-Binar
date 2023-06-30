@@ -56,7 +56,7 @@ public class UserController {
     }
     @PostMapping("/booking")
     @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
-    public ResponseEntity<Object> userAccess(HttpServletRequest request, @RequestBody Booking booking) {
+    public ResponseEntity<Object> addBooking(HttpServletRequest request, @RequestBody Booking booking) {
         try{
             Booking newBooking = new Booking();
             String token = authTokenFilter.parseJwt(request);
@@ -77,9 +77,9 @@ public class UserController {
             newBooking.setUser(user);
             Booking bookingSaved = bookingRepository.save(newBooking);
             BookingResponse bookingResponse = new BookingResponse(bookingSaved.getBookingId(),
-                    user.getEmail(), booking.getJadwal(), user.getId(), user.getUsername(),
-                    user.getPhoneNumber(), user.getFullName(), booking.getIsPaid(), booking.getJmlPenumpang(),
-                    booking.getTotalHarga());
+                    user.getEmail(), jadwal, user.getId(), user.getUsername(),
+                    user.getPhoneNumber(), user.getFullName(), booking.getIsPaid(), newBooking.getJmlPenumpang(),
+                    newBooking.getTotalHarga());
             return ResponseEntity.ok(bookingResponse);
         }catch (Exception e){
             return ResponseEntity.badRequest().body(e.getMessage());
