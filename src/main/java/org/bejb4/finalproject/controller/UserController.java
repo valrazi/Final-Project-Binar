@@ -77,10 +77,8 @@ public class UserController {
             newBooking.setUser(user);
             Booking bookingSaved = bookingRepository.save(newBooking);
             BookingResponse bookingResponse = new BookingResponse(bookingSaved.getBookingId(),
-                    bookingSaved.getUser().getEmail(), booking.getJadwal(),
-                    booking.getUser().getId(), booking.getUser().getUsername(),
-                    booking.getUser().getPhoneNumber(), booking.getUser().getFullName(),
-                    booking.getIsPaid(), booking.getJmlPenumpang(),
+                    user.getEmail(), booking.getJadwal(), user.getId(), user.getUsername(),
+                    user.getPhoneNumber(), user.getFullName(), booking.getIsPaid(), booking.getJmlPenumpang(),
                     booking.getTotalHarga());
             return ResponseEntity.ok(bookingResponse);
         }catch (Exception e){
