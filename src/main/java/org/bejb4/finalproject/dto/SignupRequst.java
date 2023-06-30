@@ -21,6 +21,14 @@ public class SignupRequst {
     @Size(min = 6, max = 40)
     private String password;
 
+    @NotBlank
+    @Size(max = 100)
+    private String fullName;
+
+    @NotBlank
+    @Size(max = 40)
+    private String phoneNum;
+
     public String getUsername() {
         return username;
     }
@@ -51,5 +59,21 @@ public class SignupRequst {
 
     public void setRole(Set<String> role) {
         this.role = role;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public String getPhoneNum() {
+        return phoneNum;
+    }
+
+    public void setPhoneNum(String phoneNum) {
+        this.phoneNum = phoneNum;
     }
 }
